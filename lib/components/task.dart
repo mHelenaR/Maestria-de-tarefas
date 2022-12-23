@@ -1,4 +1,5 @@
 import 'package:blobonotas/components/difficulty.dart';
+import 'package:blobonotas/data/task_dao.dart';
 import 'package:flutter/material.dart';
 
 class Task extends StatefulWidget {
@@ -88,6 +89,9 @@ class _TaskState extends State<Task> {
                         height: 52,
                         width: 52,
                         child: ElevatedButton(
+                          onLongPress: () {
+                            TaskDAO().delete(widget.nome);
+                          },
                           onPressed: () {
                             setState(() {
                               widget.nivel++;

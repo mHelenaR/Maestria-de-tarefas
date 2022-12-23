@@ -1,3 +1,5 @@
+import 'package:blobonotas/components/task.dart';
+import 'package:blobonotas/data/task_dao.dart';
 import 'package:blobonotas/data/task_inherited.dart';
 import 'package:flutter/material.dart';
 
@@ -140,11 +142,18 @@ class _FormScreenState extends State<FormScreen> {
                   ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        TaskInherited.of(widget.taskContext)?.newTask(
+                        TaskDAO().save(
+                          Task(
+                            nome: nameController.text,
+                            foto: imageController.text,
+                            dificuldade: int.parse(difficultyController.text),
+                          ),
+                        );
+                        /* TaskInherited.of(widget.taskContext)?.newTask(
                           nameController.text,
                           imageController.text,
                           int.parse(difficultyController.text),
-                        );
+                        );*/
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content: Text('Criando uma nova tarefa!'),
