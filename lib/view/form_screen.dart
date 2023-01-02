@@ -24,8 +24,8 @@ class _FormScreenState extends State<FormScreen> {
     return false;
   }
 
-  bool difficultValidator(String? value) {
-    if (value != null && value.isEmpty) {
+  bool difficultValidator(String value) {
+    if (value != null && value.isEmpty && value != "") {
       if (int.parse(value) > 5 || int.parse(value) < 1) {
         return true;
       }
@@ -78,10 +78,11 @@ class _FormScreenState extends State<FormScreen> {
                     padding: const EdgeInsets.all(8.0),
                     child: TextFormField(
                       validator: (value) {
-                        if (difficultValidator(value)) {
-                          return 'Insira uma dificuldade entre 1 e 5!';
+                        if (value != '') {
+                          if (difficultValidator(value!)) {
+                            return 'Insira uma dificuldade entre 1 e 5!';
+                          }
                         }
-                        return null;
                       },
                       keyboardType: TextInputType.number,
                       controller: difficultyController,
